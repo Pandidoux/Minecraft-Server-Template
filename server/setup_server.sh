@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # ____________________________________________________________
+# Java (path/command)
+javaExecutable="/c/Program Files/Java/jre1.8.0_341/bin/java.exe"
+# Java arguments
+javaArguments="-jar -Xms1G -Xmx2G"
 # Server installer JAR file
 serverInstallerJar="server-installer.jar"
 # Server JAR file
 serverJar="server.jar"
-# Path to Java
-javaExecutable="/c/Program Files/Java/jre1.8.0_341/bin/java.exe"
-# Java arguments
-javaArguments="-jar -Xms1G -Xmx2G"
 # Server JAR arguments
 jarArguments="nogui"
 # ____________________________________________________________
 
 # -------------------------
 # Commands build
-commandServerBuild="\"$javaExecutable\" -jar \"$serverInstallerJar\""
-commandServerStart="\"$javaExecutable\" $javaArguments \"$serverJar\" $jarArguments"
+commandServerBuild="$javaExecutable -jar \"$serverInstallerJar\""
+commandServerStart="$javaExecutable $javaArguments \"$serverJar\" $jarArguments"
 commandEulaAccept="echo \"eula=true\" > eula.txt"
 # -------------------------
 # Execute commands
