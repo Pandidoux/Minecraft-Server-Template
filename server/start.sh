@@ -56,9 +56,9 @@ scriptPrefix="[Script]:"
 cd "$scriptPath"
 while [[ $looping = true || $count -eq 0 ]]; do
     count=$count+1
-    echo "$scriptPrefix # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
-    echo "$scriptPrefix # # # # #   CTRL+C to stop the script # # # # #"
-    echo "$scriptPrefix # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+	echo "$scriptPrefix #########################################"
+	echo "$scriptPrefix #####   CTRL+C to stop the script   #####"
+	echo "$scriptPrefix #########################################"
     if [ $timer -gt 0 ]; then
         for ((i = 0; i <= $timer; i++)); do
             sleep 1
