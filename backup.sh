@@ -2,8 +2,8 @@
 
 
 # ____________________________________________________________
-# Server folder name
-server_folder="server"
+# Source folder
+source_folder="server"
 # Items to backup
 declare -a backup_files_or_folders=(
     "world"
@@ -30,54 +30,34 @@ declare -a backup_files_or_folders=(
     "whitelist.json"
     "config"
     "logs"
-    "plugin"
+    "plugins"
 )
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
-    # Number of backups to keep, older will be deleted. (0 to disable)
-    nbBackup=10
-    # Backup directory destination
-    backup_directory="/path/to/backups"
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable="7z"
-    # Compression parameters
-    compression_params="a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=32m -ms=on -r -bsp2"
+    nbBackup=10 # Number of backups to keep, older will be deleted. (0 to disable)
+    backup_directory="/path/to/backups" # Backup directory destination
+    compression_executable="tar" # compression executable (ex: 7z.exe, tar)
+    compression_params="-czf" # Compression parameters
 elif [[ "$OSTYPE" == "msys" ]]; then # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    # Number of backups to keep, older will be deleted. (0 to disable)
-    nbBackup=5
-    # Backup directory destination
-    backup_directory="backups"
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable="\"/c/Program Files/7-Zip/7z.exe\""
-    # Compression parameters
-    compression_params="a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2"
+    nbBackup=5 # Number of backups to keep, older will be deleted. (0 to disable)
+    backup_directory="backups" # Backup directory destination
+    compression_executable="\"/c/Program Files/7-Zip/7z.exe\"" # compression executable (ex: 7z.exe, tar)
+    compression_params="a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2" # Compression parameters
 elif [[ "$OSTYPE" == "darwin"* ]]; then # Mac OSX
-    # Number of backups to keep, older will be deleted. (0 to disable)
-    nbBackup=5
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    nbBackup=5 # Number of backups to keep, older will be deleted. (0 to disable)
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 elif [[ "$OSTYPE" == "cygwin" ]]; then # POSIX compatibility layer and Linux environment emulation for Windows
-    # Number of backups to keep, older will be deleted. (0 to disable)
-    nbBackup=5
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    nbBackup=5 # Number of backups to keep, older will be deleted. (0 to disable)
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 else # Unknown.
-    # Number of backups to keep, older will be deleted. (0 to disable)
-    nbBackup=5
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    nbBackup=5 # Number of backups to keep, older will be deleted. (0 to disable)
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 fi
 # ____________________________________________________________
 
@@ -95,7 +75,7 @@ fi
 
 
 script_execution_path=$(cd "$(dirname "$0")" && pwd)
-absolute_server_directory="$script_execution_path/$server_folder"
+absolute_server_directory="$script_execution_path/$source_folder"
 # If backup directory doesn't exist.
 if [ -d $backup_directory ]; then
     absolute_backup_directory=$(cd "$backup_directory" && pwd)
@@ -127,7 +107,7 @@ done
 
 
 dateTime=$(date +"%Y-%m-%d_%H-%M-%S")
-archive_name="backup_$dateTime.7z"
+archive_name="backup_$dateTime.tar"
 command="$compression_executable $compression_params \"$absolute_backup_directory/$archive_name\" $sources_list"
 # Execute compression command
 if [ $plugins_backup -eq 0 ]; then
@@ -141,11 +121,13 @@ fi
 
 # Keep only N most recents backups
 if [ $nbBackup -ne 0 ]; then
-    echo "Delete backups in $absolute_backup_directory/ exept the $nbBackup most recent"
-    (ls "$absolute_backup_directory/" -tp | grep '^backup_' | tail -n +$(($nbBackup + 1)) | xargs -I {} rm -- "$absolute_backup_directory/{}")
-    exit_code=$?
-    if [ $exit_code -ne 0 ]; then
-        exit $exit_code
+    if [ $exit_code -eq 0 ]; then
+        echo "Delete backups in $absolute_backup_directory/ exept the $nbBackup most recent"
+        (ls "$absolute_backup_directory/" -tp | grep '^backup_' | tail -n +$(($nbBackup + 1)) | xargs -I {} rm -f -- "$absolute_backup_directory/{}")
+        exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+            exit $exit_code
+        fi
     fi
 fi
 
@@ -161,9 +143,9 @@ if [ $plugins_backup -eq 1 ]; then
 fi
 
 
+echo "End of backup"
 if [ $plugins_backup -eq 0 ]; then
     sleep 5
-    read -p "Press Enter to continue"
 fi
 
 

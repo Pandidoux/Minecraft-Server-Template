@@ -1,46 +1,29 @@
 #!/bin/bash
 
 # ____________________________________________________________
-# Server folder name
-source_folder="server"
-# Backup directory destination
-backup_directory="backups"
+source_folder="server" # Source folder
+backup_directory="backups" # Backup directory destination
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then # Linux
-    # Backup directory destination
-    backup_directory="/path/to/backups"
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable="7z"
-    # Compression parameters
-    compression_params="a -t7z -m0=lzma2 -mx=7 -mfb=64 -md=1024m -ms=on -r -bsp2"
+    backup_directory="/path/to/backups" # Backup directory destination
+    compression_executable="tar" # compression executable (ex: 7z.exe, tar)
+    compression_params="-czf" # Compression parameters
 elif [[ "$OSTYPE" == "msys" ]]; then # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    # Backup directory destination
-    backup_directory="backups"
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable="\"/c/Program Files/7-Zip/7z.exe\""
-    # Compression parameters
-    compression_params="a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2"
+    backup_directory="backups" # Backup directory destination
+    compression_executable="\"/c/Program Files/7-Zip/7z.exe\"" # compression executable (ex: 7z.exe, tar)
+    compression_params="a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2" # Compression parameters
 elif [[ "$OSTYPE" == "darwin"* ]]; then # Mac OSX
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 elif [[ "$OSTYPE" == "cygwin" ]]; then # POSIX compatibility layer and Linux environment emulation for Windows
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 else # Unknown.
-    # Backup directory destination
-    backup_directory=""
-    # 7Zip executable (ex: 7z.exe)
-    compression_executable=""
-    # Compression parameters
-    compression_params=""
+    backup_directory="" # Backup directory destination
+    compression_executable="" # compression executable (ex: 7z.exe, tar)
+    compression_params="" # Compression parameters
 fi
 # ____________________________________________________________
 
@@ -67,7 +50,7 @@ fi
 
 
 dateTime=$(date +"%Y-%m-%d_%H-%M-%S")
-archive_name="dump_$dateTime.7z"
+archive_name="dump_$dateTime.tar"
 command="$compression_executable $compression_params \"$absolute_backup_directory/$archive_name\" \"$absolute_server_directory\""
 
 
@@ -76,5 +59,5 @@ echo "$command"
 eval "$command"
 
 
+echo "End of dump"
 sleep 5
-read -p "Press Enter to continue"

@@ -1,15 +1,16 @@
 # Minecraft-Server-Template
-A simple template directory for Minecraft servers (subject to changes)
+A simple template directory for Minecraft servers
 
-# What you got ?
-## setup_server.sh
-- Setup your server (build, auto accept eula, run a first start)
+Code repository subject to changes, download the [releases](https://github.com/Pandidoux/Minecraft-Server-Template/releases) section for stable versions.
+
+
+# What each scripts do ?
 ## start.sh
 - Start your server.
-- Can restart your server in case of shutdown.
+- Can restart your server in case of shutdown or crash.
 - Restart your server when server crash (based on server.jar exit code).
-- Detect boot-loop crash to stop the script automaticaly (based on recurent amount of crashs within a certain time window).
-- Different parameters to run on different OS / environnement.
+- Detect boot-loop crash to stop the script automaticaly (based on recurent amount of crashs within a defined time window).
+- Different parameters to run on multiple OS / environnement.
 ## backup.sh
 - Backup specified files and folder of your server
 - Handle EssentialsX `/backup` command (dont pause the script) if `--essentials` parameter is specified for the command in the plugin confuguration
@@ -19,26 +20,15 @@ A simple template directory for Minecraft servers (subject to changes)
 - Different parameters to run on different OS / environnement.
 
 
-# How to setup the scripts for your server
-## Download
-1) Open git bash in your MC servers directory
-2) Clone this repo: `git clone https://github.com/Pandidoux/Minecraft-Server-Template.git`
-3) Rename the folder `Minecraft-Server-Template` with the name you want for your server
-4) Add your servers jar files
+# Installation
+1) Install `Git` to run `.sh` scripts
+2) Create your server folder "`server-name`" where you want.
+3) Download the latest [releases](https://github.com/Pandidoux/Minecraft-Server-Template/releases) of Minecraft-Server-Template
+4) Extract the archive content, you will find a folder named `Minecraft-Server-Template-X.X.X`
+5) move all files in the `Minecraft-Server-Template-X.X.X` folder in your `server-name` folder
+6) Add your server.jar file in the `server-name/server` folder
 
-## Replace some variable parameters in setup_server.sh
-(if you want automatic installation)
-- Java (path/command)
-`javaExecutable="java"`
-- Java arguments
-`javaArguments="-jar -Xms1G -Xmx2G"`
-- Server installer JAR file
-`serverInstallerJar="server-installer.jar"`
-- Server JAR file
-`serverJar="server.jar"`
-- Server JAR arguments
-`jarArguments="nogui"`
-
+# Configuration
 ## Replace some variable parameters in start.sh
 (if you want to start your server)
 - Server JAR file (accept "server-*.jar" patern lastest version will be choosen) :
