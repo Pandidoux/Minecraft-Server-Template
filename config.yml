@@ -1,0 +1,184 @@
+# ========== HELP ==========
+# USE_COLOR => Use colors in the console output
+# ---------- start.sh ----------
+# SERVER_FOLDER_PATH => Path to the server folder
+# JAVA_EXECUTABLE => Command or path to execute java
+# JAVA_ARGUMENTS => Java argument for server the server execution
+# SERVER_JAR => Server JAR file (accept "server-*.jar" patern lastest version will be choosen)
+# SERVER_JAR_ARGUMENTS => Arguments for the server (ex: nogui)
+# BOOT_TIMER => Time in seconds to wait before server starting
+# REBOOT_SERVER => Should the server restart after a crash or shutdown ?
+# BOOTLOOP_MAX_CRASH => Maximum restart try after a crash, if a bootloop is detected stop the script
+# BOOTLOOP_RESET_TIMER => Time in seconds after a successful start to reset the bootloop prevention
+# ---------- backup.sh ----------
+# BACKUPS_EXECUTABLE => Command / path of the backup executable (ex: 7zip, tar...)
+# BACKUPS_ARGUMENTS => Arguments for the backup executable
+# BACKUPS_DIRECTORY => Directory to use for the backups files
+# BACKUPS_NAME => Name prefix of the backup (inserted before the date)
+# BACKUPS_EXTENTION => File extention of the backup (inserted after the date)
+# BACKUPS_ITEMS => List of file / folder to include in the backup (Write all items of the array on the same line)
+# BACKUPS_MAX => Maximum number of backups stored localy
+# BACKUPS_REMOTE_ENABLE: false
+# BACKUPS_DIRECTORY_REMOTE => Directory to use for the remote backups files
+# BACKUPS_MAX_REMOTE => Maximum number of backups stored remotely
+# BACKUPS_PAUSE_AFTER_FINISH => Pause script after complete instead of exit
+# ---------- dump.sh ----------
+# DUMPS_EXECUTABLE => Command / path of the server dumps executable (ex: 7zip, tar...)
+# DUMPS_ARGUMENTS => Arguments for the server dumps executable
+# DUMPS_DIRECTORY => Directory to use for the server dumps files
+# DUMPS_MAX => Maximum number of dumps stored localy
+# DUMPS_NAME => Name prefix of the dump (inserted before the date)
+# DUMPS_EXTENTION => File extention of the dump (inserted after the date)
+# DUMPS_MAX => Maximum number of dumps stored localy
+# DUMPS_REMOTE_ENABLE: => Enable or disable dumps upload
+# DUMPS_DIRECTORY_REMOTE => Directory to use for the remote dumps files
+# DUMPS_MAX_REMOTE => Maximum number of dumps stored remotely
+# DUMPS_PAUSE_AFTER_FINISH => Pause script after complete instead of exit
+
+
+# ========== Config for Linux ==========
+LINUX_USE_COLOR: true
+# ---------- start.sh ----------
+LINUX_SERVER_FOLDER_PATH: "/home/user/Minecraft_Servers/server-name/server"
+LINUX_JAVA_EXECUTABLE: "java"
+LINUX_JAVA_ARGUMENTS: "-jar -Xms512M -Xmx2G"
+LINUX_SERVER_JAR: "server-1.19.3-*.jar"
+LINUX_SERVER_JAR_ARGUMENTS: "nogui"
+LINUX_BOOT_TIMER: 10
+LINUX_REBOOT_SERVER: false
+LINUX_BOOTLOOP_MAX_CRASH: 3
+LINUX_BOOTLOOP_RESET_TIMER: 300
+# ---------- backup.sh ----------
+LINUX_BACKUPS_EXECUTABLE: "tar"
+LINUX_BACKUPS_ARGUMENTS: "-czf"
+LINUX_BACKUPS_DIRECTORY: "/home/user/Minecraft_Servers/server-name/backups"
+LINUX_BACKUPS_NAME: "backup_"
+LINUX_BACKUPS_EXTENTION: ".tar"
+LINUX_BACKUPS_ITEMS: ["config","logs","plugins","world","world_nether","world_the_end","banned-ips.json","banned-players.json","commands.yml","eula.txt","ops.json","permissions.yml","server-icon.png","server.properties","start.bat","start.sh","usercache.json","whitelist.json"]
+LINUX_BACKUPS_MAX: 2
+LINUX_BACKUPS_REMOTE_ENABLE: false
+LINUX_BACKUPS_DIRECTORY_REMOTE: "/home/user/Minecraft_Servers/server-name/backups"
+LINUX_BACKUPS_MAX_REMOTE: 5
+LINUX_BACKUPS_PAUSE_AFTER_FINISH: false
+# ---------- dump.sh ----------
+LINUX_DUMPS_EXECUTABLE: "tar"
+LINUX_DUMPS_ARGUMENTS: "-czf"
+LINUX_DUMPS_DIRECTORY: "/home/user/Minecraft_Servers/server-name/backups"
+LINUX_DUMPS_NAME: "dump_"
+LINUX_DUMPS_EXTENTION: ".tar"
+LINUX_DUMPS_MAX: 2
+LINUX_DUMPS_REMOTE_ENABLE: false
+LINUX_DUMPS_DIRECTORY_REMOTE: "/home/user/Minecraft_Servers/server-name/backups"
+LINUX_DUMPS_MAX_REMOTE: 5
+LINUX_DUMPS_PAUSE_AFTER_FINISH: false
+
+
+# ========== Config for Windows ==========
+WIN_USE_COLOR: true
+# ---------- start.sh ----------
+WIN_SERVER_FOLDER_PATH: "C:/Users/User/Documents/Minecraft_Servers/server-name/server"
+WIN_JAVA_EXECUTABLE: "java"
+WIN_JAVA_ARGUMENTS: "-jar -Xms512M -Xmx2G"
+WIN_SERVER_JAR: "server-1.19.3-*.jar"
+WIN_SERVER_JAR_ARGUMENTS: "nogui"
+WIN_BOOT_TIMER: 10
+WIN_REBOOT_SERVER: false
+WIN_BOOTLOOP_MAX_CRASH: 3
+WIN_BOOTLOOP_RESET_TIMER: 300
+# ---------- backup.sh ----------
+WIN_BACKUPS_EXECUTABLE: "C:/Program Files/7-Zip/7z.exe"
+WIN_BACKUPS_ARGUMENTS: "a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2"
+WIN_BACKUPS_DIRECTORY: "C:/Users/User/Documents/Minecraft_Servers/server-name/backups"
+WIN_BACKUPS_NAME: "backup_"
+WIN_BACKUPS_EXTENTION: ".7z"
+WIN_BACKUPS_ITEMS: ["config","logs","plugins","world","world_nether","world_the_end","banned-ips.json","banned-players.json","commands.yml","eula.txt","ops.json","permissions.yml","server-icon.png","server.properties","start.bat","start.sh","usercache.json","whitelist.json"]
+WIN_BACKUPS_MAX: 3
+WIN_BACKUPS_REMOTE_ENABLE: false
+WIN_BACKUPS_DIRECTORY_REMOTE: "Z:/Documents/Minecraft_Servers/server-name/backups"
+WIN_BACKUPS_MAX_REMOTE: 5
+WIN_BACKUPS_PAUSE_AFTER_FINISH: true
+# ---------- dump.sh ----------
+WIN_DUMPS_EXECUTABLE: "C:/Program Files/7-Zip/7z.exe"
+WIN_DUMPS_ARGUMENTS: "a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on -r -bsp2"
+WIN_DUMPS_DIRECTORY: "C:/Users/User/Documents/Minecraft_Servers/server-name/backups"
+WIN_DUMPS_NAME: "dump_"
+WIN_DUMPS_EXTENTION: ".7z"
+WIN_DUMPS_MAX: 2
+WIN_DUMPS_REMOTE_ENABLE: false
+WIN_DUMPS_DIRECTORY_REMOTE: "Z:/Documents/Minecraft_Servers/server-name/backups"
+WIN_DUMPS_MAX_REMOTE: 5
+WIN_DUMPS_PAUSE_AFTER_FINISH: true
+
+
+# ========== Config for Mac ==========
+MAC_USE_COLOR: true
+# ---------- start.sh ----------
+MAC_SERVER_FOLDER_PATH: ""
+MAC_JAVA_EXECUTABLE: "java"
+MAC_JAVA_ARGUMENTS: "-jar -Xms512M -Xmx2G"
+MAC_SERVER_JAR: "server-1.19.3-*.jar"
+MAC_SERVER_JAR_ARGUMENTS: "nogui"
+MAC_BOOT_TIMER: 10
+MAC_REBOOT_SERVER: false
+MAC_BOOTLOOP_MAX_CRASH: 5
+MAC_BOOTLOOP_RESET_TIMER: 300
+# ---------- backup.sh ----------
+MAC_BACKUPS_EXECUTABLE: "tar"
+MAC_BACKUPS_ARGUMENTS: "-czf"
+MAC_BACKUPS_DIRECTORY: ""
+MAC_BACKUPS_NAME: "backup_"
+MAC_BACKUPS_EXTENTION: ".tar"
+MAC_BACKUPS_ITEMS: ["config","logs","plugins","world","world_nether","world_the_end","banned-ips.json","banned-players.json","commands.yml","eula.txt","ops.json","permissions.yml","server-icon.png","server.properties","start.bat","start.sh","usercache.json","whitelist.json"]
+MAC_BACKUPS_MAX: 2
+MAC_BACKUPS_REMOTE_ENABLE: false
+MAC_BACKUPS_DIRECTORY_REMOTE: ""
+MAC_BACKUPS_MAX_REMOTE: 5
+MAC_BACKUPS_PAUSE_AFTER_FINISH: true
+# ---------- dump.sh ----------
+MAC_DUMPS_EXECUTABLE: "tar"
+MAC_DUMPS_ARGUMENTS: "-czf"
+MAC_DUMPS_DIRECTORY: ""
+MAC_DUMPS_NAME: "dump_"
+MAC_DUMPS_EXTENTION: ".tar"
+MAC_DUMPS_MAX: 2
+MAC_DUMPS_REMOTE_ENABLE: false
+MAC_DUMPS_DIRECTORY_REMOTE: ""
+MAC_DUMPS_MAX_REMOTE: 10
+MAC_DUMPS_PAUSE_AFTER_FINISH: true
+
+
+# ========== Config for POSIX ==========
+POSIX_USE_COLOR: true
+# ---------- start.sh ----------
+POSIX_SERVER_FOLDER_PATH: ""
+POSIX_JAVA_EXECUTABLE: "java"
+POSIX_JAVA_ARGUMENTS: "-jar -Xms512M -Xmx2G"
+POSIX_SERVER_JAR: "server-1.19.3-*.jar"
+POSIX_SERVER_JAR_ARGUMENTS: "nogui"
+POSIX_BOOT_TIMER: 10
+POSIX_REBOOT_SERVER: false
+POSIX_BOOTLOOP_MAX_CRASH: 5
+POSIX_BOOTLOOP_RESET_TIMER: 300
+# ---------- backup.sh ----------
+POSIX_BACKUPS_EXECUTABLE: "tar"
+POSIX_BACKUPS_ARGUMENTS: "-czf"
+POSIX_BACKUPS_DIRECTORY: ""
+POSIX_BACKUPS_NAME: "backup_"
+POSIX_BACKUPS_EXTENTION: ".tar"
+POSIX_BACKUPS_ITEMS: ["config","logs","plugins","world","world_nether","world_the_end","banned-ips.json","banned-players.json","commands.yml","eula.txt","ops.json","permissions.yml","server-icon.png","server.properties","start.bat","start.sh","usercache.json","whitelist.json"]
+POSIX_BACKUPS_MAX: 2
+POSIX_BACKUPS_REMOTE_ENABLE: false
+POSIX_BACKUPS_DIRECTORY_REMOTE: ""
+POSIX_BACKUPS_MAX_REMOTE: 5
+POSIX_BACKUPS_PAUSE_AFTER_FINISH: false
+# ---------- dump.sh ----------
+POSIX_DUMPS_EXECUTABLE: "tar"
+POSIX_DUMPS_ARGUMENTS: "-czf"
+POSIX_DUMPS_DIRECTORY: ""
+POSIX_DUMPS_NAME: "dump_"
+POSIX_DUMPS_EXTENTION: ".tar"
+POSIX_DUMPS_MAX: 2
+POSIX_DUMPS_REMOTE_ENABLE: false
+POSIX_DUMPS_DIRECTORY_REMOTE: ""
+POSIX_DUMPS_MAX_REMOTE: 10
+POSIX_DUMPS_PAUSE_AFTER_FINISH: false
