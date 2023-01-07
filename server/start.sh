@@ -112,7 +112,7 @@ while [[ $REBOOT_SERVER = "true" || $COUNT -eq 0 ]]; do
     fi
     echo -e "$SCRIPT_PREFIX ${YELLOW}______________________________ THE SERVER IS STARTING ______________________________${RESET}"
     # Get last matching jar (for server auto-update on reboot)
-    SERVER_JAR_LATEST=$(find "$SERVER_FOLDER_PATH" -maxdepth 1 -name "paper-1.19.3-*.jar" -printf "%h/%f\n" | sort -r | head -1)
+    SERVER_JAR_LATEST=$(find "$SERVER_FOLDER_PATH" -maxdepth 1 -name "$SERVER_JAR" -printf "%h/%f\n" | sort -r | head -1)
     if [ ! -f "$SERVER_JAR_LATEST" ]; then
         echo -e "$SCRIPT_PREFIX ${RED}ERROR Cannot find $SERVER_JAR file in directory $SERVER_FOLDER_PATH${RESET}"
         exit 1
