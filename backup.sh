@@ -69,7 +69,8 @@ fi
 SCRIPT_PREFIX="${MAGENTA}[Backup]:${RESET}"
 
 # Sever directory verification
-if [ ! -d $SERVER_FOLDER_PATH ]; then # Not a valid directory
+eval SERVER_FOLDER_PATH="$SERVER_FOLDER_PATH"
+if [ ! -d "$SERVER_FOLDER_PATH" ]; then # Not a valid directory
     echo -e "$SCRIPT_PREFIX ${RED}ERROR Parameter ${OS_PREFIX}_SERVER_FOLDER_PATH is not recognise as a directory => \"$SERVER_FOLDER_PATH\"${RESET}"
     exit 1
 fi
